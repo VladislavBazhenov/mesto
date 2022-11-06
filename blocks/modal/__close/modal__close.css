@@ -1,0 +1,10 @@
+.modal__close {
+  background: url('../../../images/Close__Icon.svg');
+  border: none;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 0;
+  top: -36px;
+  cursor: pointer;
+}

@@ -1,0 +1,27 @@
+.profile__info {
+    width: 100%;
+    margin-bottom: 36px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px 10px;
+}
+
+@media screen and (min-width:768px) {
+    .profile__info  {
+        margin-bottom: 25px;
+        margin-right: 144px;
+        justify-content: flex-start;
+        gap: 16px 18px;
+        
+    }
+  }
+
+  @media screen and (min-width:1024px) {
+    .profile__info  {
+        margin-right: 244px;
+        margin-bottom: 0;
+    }
+  }
