@@ -9,3 +9,9 @@
   width: 100%;
   max-width: 430px;
 }
+
+@media screen and (min-width:1024px) {
+  .modal__content {
+    padding: 34px 36px 37px;
+  }
+}

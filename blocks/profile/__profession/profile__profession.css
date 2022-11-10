@@ -5,7 +5,7 @@
     line-height: 17px;
     margin: 0;
     padding: 0;
-    width: 100%;
+    max-width: 282px;
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
@@ -14,7 +14,7 @@
 
 @media screen and (min-width:768px) {
   .profile__profession {
-      width: fit-content;
+      max-width: 294px;
   }
 }
 

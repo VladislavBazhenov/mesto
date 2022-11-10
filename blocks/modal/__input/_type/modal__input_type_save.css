@@ -1,0 +1,22 @@
+.modal__input_type_save {
+  color: #fff;
+  text-align: center;
+  background-color: #000;
+  border-radius: 2px;
+  width: 100%;
+  height: 46px;
+  border: none;
+}
+
+.modal__input_type_save:hover {
+  opacity: .8;
+  transition: .3s;
+}
+
+@media screen and (min-width:1024px) {
+  .modal__input_type_save {
+    font-size: 18px;
+    line-height: 22px;
+    height: 50px;
+  }
+}
