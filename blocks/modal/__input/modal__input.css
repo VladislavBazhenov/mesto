@@ -1,12 +1,29 @@
 .modal__input {
-  border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, .2);
-  padding: 0;
-  margin: 0;
   font-family: 'Inter', Arial, sans-serif;
   color: #000;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
   cursor: pointer;
 }
+
+.modal__input:last-child {
+  margin: 0;
+  padding: 0;
+  margin-top: 14px;
+}
+
+@media screen and (min-width:1024px) {
+  .modal__input  {
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+  }
+}
+
