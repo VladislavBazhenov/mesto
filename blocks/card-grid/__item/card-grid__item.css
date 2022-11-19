@@ -4,6 +4,7 @@
   border-top-right-radius: 10px;
   height: 282px;
   cursor: pointer;
+  object-fit: cover;
 }
 
 .card-grid__item:hover {

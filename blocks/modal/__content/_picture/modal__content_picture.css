@@ -1,0 +1,14 @@
+.modal__content_picture {
+  border-radius: 0;
+  background: 0;
+  padding: 0;
+  min-height: fit-content;
+  max-width: fit-content;
+  font-size: 0;
+}
+
+@media screen and (min-width:1024px) {
+  .modal__content_picture {
+    padding: 0;
+  }
+}
