@@ -42,12 +42,20 @@
 @import url('../blocks/modal/__close/modal__close.css');
 @import url('../blocks/modal/__content/modal__content.css');
 @import url('../blocks/modal/__form/modal__form.css');
+@import url('../blocks/modal/__form-field/modal__form-field.css');
 @import url('../blocks/modal/__input/modal__input.css');
 @import url('../blocks/modal/__input/_type/modal__input_type_save.css');
+@import url('../blocks/modal/__input/_type/modal__input_type_error.css');
+@import url('../blocks/modal/__input/_disabled/modal__input_disabled.css');
 @import url('../blocks/modal/__title/modal__title.css');
 @import url('../blocks/modal/__title/_picture/modal__title_picture.css');
 @import url('../blocks/modal/_active/modal_active.css');
 @import url('../blocks/modal/__content/_picture/modal__content_picture.css');
+@import url('../blocks/modal/__input-error/modal__input-error.css');
+@import url('../blocks/modal/__input-error/_active/modal__input-error_active.css');
+
+
+
 
 
 /*modal-picture*/

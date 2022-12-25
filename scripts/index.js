@@ -1,14 +1,25 @@
 //Добавление класса в попапы 
 const modalActiveClass = 'modal_active';
 
+
 //Общие функции открытия/закрытия попапов
+
+const handleEscButton = (evt) => {
+  const activePopup = document.querySelector('.modal_active');
+  if (evt.key === 'Escape') {
+    closePopup(activePopup);
+  }
+};
+
 function openPopup(popup) {
   popup.classList.add(modalActiveClass);
-}
+  document.addEventListener('keydown', handleEscButton);
+};
 
 function closePopup(popup) {
   popup.classList.remove(modalActiveClass);
-}
+  document.removeEventListener('keydown', handleEscButton);
+};
 
 function closeModalProfile(event) {
   if (!modalEditContent.contains(event.target) 
@@ -16,7 +27,7 @@ function closeModalProfile(event) {
   || event.target === submitEditInput) {
    closePopup(modalEdit);
  }
-}
+};
 
 function closeModalAdd(event) {
   if (!modalAddContent.contains(event.target) 
@@ -24,7 +35,7 @@ function closeModalAdd(event) {
    || event.target === submitAddInput) {
     closePopup(modalAdd);
   }
-}
+};
 
 /*Попап редактирования профиля*/
 const buttonOpenEditModal = document.querySelector('.profile__editButton');
