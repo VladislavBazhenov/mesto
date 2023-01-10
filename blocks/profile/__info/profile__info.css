@@ -7,18 +7,13 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 14px 10px;
+    margin: 0;
 }
-
-@media screen and (min-width:425px) {
-    .profile__info  {
-      flex-direction: column;
-    }
-  }
 
 @media screen and (min-width:768px) {
     .profile__info  {
         flex-direction: row;
-        margin-bottom: 25px;
+        margin-bottom: 0;
         margin-right: 144px;
         justify-content: flex-start;
         gap: 10px 18px;

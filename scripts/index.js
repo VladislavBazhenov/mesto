@@ -5,8 +5,8 @@ const modalActiveClass = 'modal_active';
 //Общие функции открытия/закрытия попапов
 
 const handleEscButton = (evt) => {
-  const activePopup = document.querySelector('.modal_active');
   if (evt.key === 'Escape') {
+    const activePopup = document.querySelector('.modal_active');
     closePopup(activePopup);
   }
 };
@@ -23,69 +23,67 @@ function closePopup(popup) {
 
 function closeModalProfile(event) {
   if (!modalEditContent.contains(event.target) 
-  || event.target === buttonCloseEditModal 
-  || event.target === submitEditInput) {
-   closePopup(modalEdit);
+  || event.target === buttonCloseEditModal) {
+   closePopup(modalEditProfile);
  }
 };
 
 function closeModalAdd(event) {
   if (!modalAddContent.contains(event.target) 
-   || event.target === buttonCloseAddModal 
-   || event.target === submitAddInput) {
-    closePopup(modalAdd);
+   || event.target === buttonCloseAddModal) {
+    closePopup(modalAddCard);
   }
 };
 
 /*Попап редактирования профиля*/
 const buttonOpenEditModal = document.querySelector('.profile__editButton');
-const modalEdit = document.querySelector('.modal-edit');
-const modalEditContent = modalEdit.querySelector('.modal__content');
-const buttonCloseEditModal = modalEdit.querySelector('.modal__close');
-const submitEditInput = modalEdit.querySelector('.modal__input_type_save');
+const modalEditProfile = document.querySelector('.modal-edit');
+const modalEditContent = modalEditProfile.querySelector('.modal__content');
+const buttonCloseEditModal = modalEditProfile.querySelector('.modal__close');
+const submitEditInput = modalEditProfile.querySelector('.modal__input_type_save');
 
 buttonOpenEditModal.addEventListener('click', () => {
-  openPopup(modalEdit);
-});
-
-modalEdit.addEventListener('click', closeModalProfile);
-
-/*Попап добавления карточек*/
-const buttonOpenAddModal = document.querySelector('.profile__addButton');
-const modalAdd = document.querySelector('.modal-add');
-const modalAddContent = modalAdd.querySelector('.modal__content')
-const buttonCloseAddModal = modalAdd.querySelector('.modal__close');
-const submitAddInput = modalAdd.querySelector('.modal__input_type_save');
-
-buttonOpenAddModal.addEventListener('click', () => {
-  openPopup(modalAdd);
-});
-
-modalAdd.addEventListener('click', closeModalAdd);
-
-/*form+modalEdit*/
-const profileForm = modalEdit.querySelector('.modal__form');
-const nameInput = profileForm.querySelector('.modal__input_type_name');
-const professionInput = profileForm.querySelector('.modal__input_type_profession');
-const profileContainer = document.querySelector('.profile__info');
-const nameText = profileContainer.querySelector('.profile__name');
-const professionText = profileContainer.querySelector('.profile__profession');
-
-profileForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  nameText.textContent = nameInput.value;
-  professionText.textContent = professionInput.value;
-});
-
-/*name+profession*/
-buttonOpenEditModal.addEventListener('click', (event) => {
+  openPopup(modalEditProfile);
   nameInput.value = nameText.textContent;
   professionInput.value = professionText.textContent;
 });
 
+modalEditProfile.addEventListener('click', closeModalProfile);
+
+/*Попап добавления карточек*/
+const buttonOpenAddModal = document.querySelector('.profile__addButton');
+const modalAddCard = document.querySelector('.modal-add');
+const modalAddContent = modalAddCard.querySelector('.modal__content')
+const buttonCloseAddModal = modalAddCard.querySelector('.modal__close');
+const submitAddInput = modalAddCard.querySelector('.modal__input_type_save');
+
+buttonOpenAddModal.addEventListener('click', () => {
+  openPopup(modalAddCard);
+  clearInput();
+  submitAddInput.classList.add('modal__input_disabled');
+  submitAddInput.setAttribute('disabled', 'disabled');
+});
+
+modalAddCard.addEventListener('click', closeModalAdd);
+
+/*form+modalEdit*/
+const profileForm = modalEditProfile.querySelector('.modal__form');
+const nameInput = profileForm.querySelector('.modal__input_type_name');
+const professionInput = profileForm.querySelector('.modal__input_type_profession');
+const profileContainer = document.querySelector('.profile__info');
+const nameText = profileContainer.querySelector('.profile__name');
+const professionText = document.querySelector('.profile__profession');
+
+profileForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  closePopup(modalEditProfile);
+  nameText.textContent = nameInput.value;
+  professionText.textContent = professionInput.value;
+});
+
 //Карточки
 const cardsContainer = document.querySelector('.card-grid');
-const cardForm = modalAdd.querySelector('.modal__form');
+const cardForm = modalAddCard.querySelector('.modal__form');
 const modalPicture = document.querySelector('.modal-picture');
 const modalPictureContent = modalPicture.querySelector('.modal__content');
 const cardModalPicture = modalPicture.querySelector('.modal-picture__image');
@@ -97,12 +95,12 @@ const cardSample = document.querySelector('#template-cards').content.querySelect
 
 cardForm.addEventListener('submit', (event) => {
   event.preventDefault();
+  closePopup(modalAddCard);
   renderCard({ 
     name: placeNameInput.value ,
     link: imageLinkInput.value
   });
-  placeNameInput.value = '';
-  imageLinkInput.value = '';
+  event.target.reset();
 });
 
 const createCard = (card) => {
