@@ -1,6 +1,7 @@
 .modal__close {
   background: no-repeat url('../../../images/Close__Icon.svg');
   background-position: center;
+  background-size: contain;
   position: absolute;
   cursor: pointer;
   border: none;
