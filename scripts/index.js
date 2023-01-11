@@ -46,8 +46,7 @@ buttonOpenEditModal.addEventListener('click', () => {
   openPopup(modalEditProfile);
   nameInput.value = nameText.textContent;
   professionInput.value = professionText.textContent;
-  submitEditInput.classList.remove('modal__input_disabled');
-  submitEditInput.removeAttribute('disabled', 'disabled');
+  enableSubmitButton(submitEditInput);
 });
 
 modalEditProfile.addEventListener('click', closeModalProfile);
@@ -61,8 +60,7 @@ const submitAddInput = modalAddCard.querySelector('.modal__input_type_save');
 
 buttonOpenAddModal.addEventListener('click', () => {
   openPopup(modalAddCard);
-  submitAddInput.classList.add('modal__input_disabled');
-  submitAddInput.setAttribute('disabled', 'disabled');
+  disableSubmitButton(submitAddInput);
 });
 
 modalAddCard.addEventListener('click', closeModalAdd);

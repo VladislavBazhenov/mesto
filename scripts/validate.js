@@ -11,6 +11,15 @@ const hideInputError = (formElement, inputElement, config) => {
   errorElement.textContent = '';
 }
 
+const disableSubmitButton = (submitButton) => {
+  submitButton.classList.add('modal__input_disabled');
+  submitButton.setAttribute('disabled', 'disabled');
+}
+const enableSubmitButton = (submitButton) => {
+  submitButton.classList.remove('modal__input_disabled');
+  submitButton.removeAttribute('disabled', 'disabled');
+}
+
 const toggleButtonState = (inputList, buttonElement, config) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(config.inactiveButtonClass);
