@@ -1,6 +1,11 @@
+import { initialCards } from './constants.js';
+import { Card } from './Card.js';
+import { validationSettings } from './constants.js';
+import { FormValidator } from './FormValidator.js';
+
+
 //Добавление класса в попапы 
 const modalActiveClass = 'modal_active';
-
 
 //Общие функции открытия/закрытия попапов
 
@@ -40,13 +45,11 @@ const buttonOpenEditModal = document.querySelector('.profile__editButton');
 const modalEditProfile = document.querySelector('.modal-edit');
 const modalEditContent = modalEditProfile.querySelector('.modal__content');
 const buttonCloseEditModal = modalEditProfile.querySelector('.modal__close');
-const submitEditInput = modalEditProfile.querySelector('.modal__input_type_save');
 
 buttonOpenEditModal.addEventListener('click', () => {
   openPopup(modalEditProfile);
   nameInput.value = nameText.textContent;
   professionInput.value = professionText.textContent;
-  enableSubmitButton(submitEditInput);
 });
 
 modalEditProfile.addEventListener('click', closeModalProfile);
@@ -56,11 +59,9 @@ const buttonOpenAddModal = document.querySelector('.profile__addButton');
 const modalAddCard = document.querySelector('.modal-add');
 const modalAddContent = modalAddCard.querySelector('.modal__content')
 const buttonCloseAddModal = modalAddCard.querySelector('.modal__close');
-const submitAddInput = modalAddCard.querySelector('.modal__input_type_save');
 
 buttonOpenAddModal.addEventListener('click', () => {
   openPopup(modalAddCard);
-  disableSubmitButton(submitAddInput);
 });
 
 modalAddCard.addEventListener('click', closeModalAdd);
@@ -80,6 +81,7 @@ profileForm.addEventListener('submit', (event) => {
   professionText.textContent = professionInput.value;
 });
 
+
 //Карточки
 const cardsContainer = document.querySelector('.card-grid');
 const cardForm = modalAddCard.querySelector('.modal__form');
@@ -90,7 +92,6 @@ const modalPictureCloseButton = modalPicture.querySelector('.modal__close');
 const titlePicture = modalPicture.querySelector('.modal__title_picture');
 const placeNameInput = cardForm.querySelector('.modal__input_type_place-name');
 const imageLinkInput = cardForm.querySelector('.modal__input_type_image-link');
-const cardSample = document.querySelector('#template-cards').content.querySelector('.card-grid__element');
 
 cardForm.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -102,33 +103,16 @@ cardForm.addEventListener('submit', (event) => {
   event.target.reset();
 });
 
-const createCard = (card) => {
-  const copyCardSample = cardSample.cloneNode(true);
-  const picture = copyCardSample.querySelector('.card-grid__item');
-  const title = copyCardSample.querySelector('.card-grid__title');
-  const deleteButton = copyCardSample.querySelector('.urn');
-  const likeButton = copyCardSample.querySelector('.card-grid__likeButton');
-  
-  title.textContent = card.name;
-  picture.src = card.link;
-  picture.alt = card.name;
-  deleteButton.addEventListener('click', () =>{
-    copyCardSample.remove();
-  });
-
-
-  picture.addEventListener('click', () => {
-    openPopup(modalPicture);
-    cardModalPicture.src = card.link;
-    cardModalPicture.alt = card.name;
-    titlePicture.textContent = card.name;
-  });
-  likeButton.addEventListener('click', () => {
-    likeButton.classList.toggle(buttonLikeActiveClass);
-  });
-  return copyCardSample;
+//открытие попапа с картинкой
+function openPopupImage (card) {
+  cardModalPicture.alt = card.name;
+  cardModalPicture.src = card.link;
+  titlePicture.textContent = card.name;
+  openPopup(modalPicture);
 };
 
+
+//Закрытие попапа с картинкой
 modalPicture.addEventListener('click', (event) => {
   if (!modalPictureContent.contains(event.target) 
   || event.target === modalPictureCloseButton) {
@@ -136,12 +120,20 @@ modalPicture.addEventListener('click', (event) => {
   }
 });
 
+
+//Отрисовка карточки
 const renderCard = (card) => {
-  cardsContainer.prepend(createCard(card));
+  const anyCard = new Card(card, '#template-cards', openPopupImage);
+  cardsContainer.prepend(anyCard.getView());
 };
+
 
 initialCards.forEach((card) => {
   renderCard(card);
 });
 
-const buttonLikeActiveClass = 'сard-grid__likeButton_active';
+const formProfileValid = new FormValidator(validationSettings, modalEditProfile)
+const formAddValid = new FormValidator(validationSettings, modalAddCard)
+
+formProfileValid.enableValidation();
+formAddValid.enableValidation();
