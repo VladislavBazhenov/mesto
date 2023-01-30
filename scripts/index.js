@@ -1,14 +1,14 @@
+
 import { initialCards } from './constants.js';
 import { Card } from './Card.js';
 import { validationSettings } from './constants.js';
 import { FormValidator } from './FormValidator.js';
 
 
-//Добавление класса в попапы 
+//Для октрытия попапов
 const modalActiveClass = 'modal_active';
 
 //Общие функции открытия/закрытия попапов
-
 const handleEscButton = (evt) => {
   if (evt.key === 'Escape') {
     const activePopup = document.querySelector('.modal_active');
@@ -26,45 +26,38 @@ function closePopup(popup) {
   document.removeEventListener('keydown', handleEscButton);
 };
 
-function closeModalProfile(event) {
-  if (!modalEditContent.contains(event.target) 
-  || event.target === buttonCloseEditModal) {
-   closePopup(modalEditProfile);
- }
-};
-
-function closeModalAdd(event) {
-  if (!modalAddContent.contains(event.target) 
-   || event.target === buttonCloseAddModal) {
-    closePopup(modalAddCard);
-  }
-};
+//Закрытие попапов оверлей/крестик
+const popups = document.querySelectorAll('.modal');
+popups.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('modal_active')) {
+      closePopup(popup);
+    };
+    if (evt.target.classList.contains('modal__close')) {
+      closePopup(popup);
+    };
+  });
+});
 
 /*Попап редактирования профиля*/
 const buttonOpenEditModal = document.querySelector('.profile__editButton');
 const modalEditProfile = document.querySelector('.modal-edit');
-const modalEditContent = modalEditProfile.querySelector('.modal__content');
-const buttonCloseEditModal = modalEditProfile.querySelector('.modal__close');
 
 buttonOpenEditModal.addEventListener('click', () => {
   openPopup(modalEditProfile);
   nameInput.value = nameText.textContent;
   professionInput.value = professionText.textContent;
+  formProfileValid.resetValidation();
 });
-
-modalEditProfile.addEventListener('click', closeModalProfile);
 
 /*Попап добавления карточек*/
 const buttonOpenAddModal = document.querySelector('.profile__addButton');
 const modalAddCard = document.querySelector('.modal-add');
-const modalAddContent = modalAddCard.querySelector('.modal__content')
-const buttonCloseAddModal = modalAddCard.querySelector('.modal__close');
 
 buttonOpenAddModal.addEventListener('click', () => {
   openPopup(modalAddCard);
+  formAddValid.resetValidation();
 });
-
-modalAddCard.addEventListener('click', closeModalAdd);
 
 /*form+modalEdit*/
 const profileForm = modalEditProfile.querySelector('.modal__form');
@@ -120,11 +113,16 @@ modalPicture.addEventListener('click', (event) => {
   }
 });
 
+function createCard (item) {
+  const anyCard = new Card(item, '#template-cards', openPopupImage);
+  const cardElement = anyCard.getView();
+
+  return cardElement;
+};
 
 //Отрисовка карточки
 const renderCard = (card) => {
-  const anyCard = new Card(card, '#template-cards', openPopupImage);
-  cardsContainer.prepend(anyCard.getView());
+  cardsContainer.prepend(createCard(card));
 };
 
 
@@ -132,8 +130,8 @@ initialCards.forEach((card) => {
   renderCard(card);
 });
 
-const formProfileValid = new FormValidator(validationSettings, modalEditProfile)
-const formAddValid = new FormValidator(validationSettings, modalAddCard)
+const formProfileValid = new FormValidator(validationSettings, profileForm);
+const formAddValid = new FormValidator(validationSettings, cardForm);
 
 formProfileValid.enableValidation();
 formAddValid.enableValidation();
