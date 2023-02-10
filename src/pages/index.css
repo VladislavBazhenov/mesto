@@ -45,7 +45,7 @@
 @import url('../blocks/modal/__form/modal__form.css');
 @import url('../blocks/modal/__form-field/modal__form-field.css');
 @import url('../blocks/modal/__input/modal__input.css');
-@import url('../blocks/modal/__input/_type/modal__input_type_save.css');
+@import url('../blocks/modal/__submit-button/modal__submit-button.css');
 @import url('../blocks/modal/__input/_type/modal__input_type_error.css');
 @import url('../blocks/modal/__input/_disabled/modal__input_disabled.css');
 @import url('../blocks/modal/__title/modal__title.css');
