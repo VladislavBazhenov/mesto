@@ -1,4 +1,10 @@
 .modal__input_type_save {
+  font-family: 'Inter', Arial, sans-serif;
+  box-sizing: border-box;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  cursor: pointer;
   color: #fff;
   text-align: center;
   background-color: #000;

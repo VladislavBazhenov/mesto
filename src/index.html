@@ -4,17 +4,17 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
+  <!--<link rel="stylesheet" href="./pages/index.css">-->
   <title>Mesto</title>
 </head>
 <body class="body">
   <div class="page">
     <header class="header">
-      <img src="./images/logo.svg" alt="Логотип" class="logo">
+      <img src="<%=require('./images/logo.svg')%>" alt="Логотип" class="logo">
     </header>
     <main class="main">
       <section class="profile">
-        <img src="./images/Jak_Iv_Kusto.jpg" class="profile__avatar" alt="Аватар профиля">
+        <img src="<%=require('./images/Jak_Iv_Kusto.jpg')%>" class="profile__avatar" alt="Аватар профиля">
         <div class="profile__container">
           <div class="profile__info">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -46,7 +46,7 @@
             type="text" 
             minlength="2" maxlength="40" 
             class="modal__input modal__input_type_name" 
-            name="name" 
+            name="username" 
             placeholder="Введите имя">
           <span class="modal__input-error name-input-error"></span> 
         </label>
@@ -60,14 +60,14 @@
             placeholder="Введите профессию">
           <span class="modal__input-error profession-input-error"></span> 
         </label>
-        <input type="submit" value="Сохранить" class="modal__input modal__input_type_save">
+        <input type="submit" value="Сохранить" class="modal__input_type_save">
       </form>
     </div>
   </section>
   <section class="modal modal-add">
     <div class="modal__content">
       <button type="button" class="modal__close button-hover"></button>
-      <form class="modal__form" name="main" novalidate>
+      <form class="modal__form modal__form_type_add" name="main" novalidate>
         <h3 class="modal__title">Новое место</h3>
         <label class="modal__form-field">
           <input required 
@@ -75,7 +75,7 @@
             type="text" 
             minlength="2" maxlength="30" 
             class="modal__input modal__input_type_place-name" 
-            name="place-name" 
+            name="name" 
             placeholder="Название">
           <span class="modal__input-error placename-input-error"></span>
         </label> 
@@ -84,11 +84,11 @@
             id="imagelink-input" 
             type="url" 
             class="modal__input modal__input_type_image-link" 
-            name="image-link" 
+            name="link" 
             placeholder="Ссылка на картинку">
           <span class="modal__input-error imagelink-input-error"></span>
         </label>
-        <input type="submit" value="Создать" class="modal__input modal__input_type_save">
+        <input type="submit" value="Создать" class="modal__input_type_save">
       </form>
     </div>
   </section>
@@ -111,6 +111,6 @@
       </div>
     </li>
   </template>
-  <script type ="module" src="./scripts/index.js"></script>
+  <!--<script type ="module" src="./pages/index.js"></script>-->
 </body>
 </html>

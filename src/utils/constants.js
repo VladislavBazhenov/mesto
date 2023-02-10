@@ -34,3 +34,20 @@ export const validationSettings = {
   errorClass: 'modal__input-error_active',
   inactiveButtonClass: 'modal__input_disabled'
 };
+
+export const modalActiveClass = 'modal_active';
+export const modalCloseBttn = 'modal__close';
+
+export const modalPicture = document.querySelector('.modal-picture');
+export const cardModalPicture = modalPicture.querySelector('.modal-picture__image');
+export const titlePicture = modalPicture.querySelector('.modal__title_picture');
+
+export const modalEditProfile = document.querySelector('.modal-edit');
+export const profileForm = modalEditProfile.querySelector('.modal__form');
+export const nameInput = profileForm.querySelector('.modal__input_type_name');
+export const professionInput = profileForm.querySelector('.modal__input_type_profession');
+
+export const modalAddCard = document.querySelector('.modal-add');
+export const cardForm = modalAddCard.querySelector('.modal__form');
+export const buttonOpenAddModal = document.querySelector('.profile__addButton');
+export const buttonOpenEditModal = document.querySelector('.profile__editButton');

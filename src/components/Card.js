@@ -1,11 +1,11 @@
 export { Card };
 
  class Card {
-  constructor(data, template, openPopupImage) {
+  constructor(data, template, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._template = template;
-    this._openPopupImage = openPopupImage;
+    this._handleCardClick = handleCardClick;
   }
   
   _getTemplate() {
@@ -33,7 +33,7 @@ export { Card };
   }
 
   _handleCardPopup() {
-    this._openPopupImage({name: this._name, link: this._link});
+    this._handleCardClick({name: this._name, link: this._link});
   }
 
   _setEventListeners() {
