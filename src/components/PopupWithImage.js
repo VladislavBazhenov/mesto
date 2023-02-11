@@ -1,13 +1,12 @@
-export { PopupWithImage };
 import { Popup } from "./Popup.js";
-import { cardModalPicture, titlePicture } from "../utils/constants.js";
+export { PopupWithImage };
 
 
 class PopupWithImage extends Popup {
    constructor(popupSelector) {
     super(popupSelector);
-    this._link = cardModalPicture;
-    this._name = titlePicture;
+    this._link = this._popup.querySelector('.modal-picture__image');
+    this._name = this._popup.querySelector('.modal__title_picture');
   }
 
   open(card) {

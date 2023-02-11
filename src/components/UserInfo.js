@@ -1,5 +1,5 @@
-export { UserInfo };
 import {nameInput, professionInput} from '../utils/constants.js'
+export { UserInfo };
 
 class UserInfo {
   constructor(selectors) {

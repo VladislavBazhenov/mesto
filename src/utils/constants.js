@@ -35,12 +35,7 @@ export const validationSettings = {
   inactiveButtonClass: 'modal__input_disabled'
 };
 
-export const modalActiveClass = 'modal_active';
-export const modalCloseBttn = 'modal__close';
-
 export const modalPicture = document.querySelector('.modal-picture');
-export const cardModalPicture = modalPicture.querySelector('.modal-picture__image');
-export const titlePicture = modalPicture.querySelector('.modal__title_picture');
 
 export const modalEditProfile = document.querySelector('.modal-edit');
 export const profileForm = modalEditProfile.querySelector('.modal__form');

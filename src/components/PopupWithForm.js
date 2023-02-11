@@ -1,5 +1,5 @@
-export { PopupWithForm };
 import { Popup } from "./Popup.js";
+export { PopupWithForm };
 
 
 class PopupWithForm extends Popup {

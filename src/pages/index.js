@@ -9,25 +9,20 @@ import { validationSettings,
           buttonOpenEditModal } from '../utils/constants.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
-import { Popup } from '../components/Popup.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
-
-
-const popupEditProfile = new Popup('.modal-edit');
-const popupAddCard = new Popup('.modal-add');
 
 const userInfo = new UserInfo({
   username:'.profile__name',
   profession: '.profile__profession'});
 
-const cardProfileForm = new PopupWithForm('.modal-edit', 
+const popupEditProfile = new PopupWithForm('.modal-edit', 
 { submitForm: (item) => {
   userInfo.setUserInfo(item);
 }
 });
-const cardAddForm = new PopupWithForm('.modal-add', 
+const popupAddCard = new PopupWithForm('.modal-add', 
 { submitForm: (item) => {
   const {name, link} = item; 
   const newCreateCard = createCard({name, link});
@@ -56,11 +51,9 @@ function createCard (item) {
 };
 
 
-popupAddCard.setEventListeners();
 popupImage.setEventListeners();
 popupEditProfile.setEventListeners();
-cardProfileForm.setEventListeners();
-cardAddForm.setEventListeners();
+popupAddCard.setEventListeners();
 
 
 buttonOpenEditModal.addEventListener('click', () => {

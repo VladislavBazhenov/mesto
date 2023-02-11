@@ -1,25 +1,24 @@
 export { Popup };
-import { modalActiveClass } from "../utils/constants.js";
-import { modalCloseBttn } from "../utils/constants.js";
 
 class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
+    this._modalActiveClass = 'modal_active';
+    this._modalCloseBttn = 'modal__close';
     this._handleEscCloseBound = this._handleEscClose.bind(this);
+    this._esc = 'Escape';
   }
   
   _handleEscClose(evt) {
-    if (evt.key === 'Escape') {
+    if (evt.key === this._esc) {
       this.close();
     };
   }
 
   setEventListeners() {
     this._popup.addEventListener('mousedown', (evt) => {
-      if (evt.target.classList.contains(modalActiveClass)) {
-        this.close();
-      };
-      if (evt.target.classList.contains(modalCloseBttn)) {
+      if (evt.target.classList.contains(this._modalActiveClass)
+      ||evt.target.classList.contains(this._modalCloseBttn)) {
         this.close();
       };
     });
@@ -27,13 +26,13 @@ class Popup {
   }
   
   open() {
-    this._popup.classList.add(modalActiveClass);
+    this._popup.classList.add(this._modalActiveClass);
     document
     .addEventListener('keydown',this._handleEscCloseBound);
   }
 
   close() {
-    this._popup.classList.remove(modalActiveClass);
+    this._popup.classList.remove(this._modalActiveClass);
     document
     .removeEventListener('keydown', this._handleEscCloseBound);
   }
