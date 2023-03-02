@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!--<link rel="stylesheet" href="./pages/index.css">-->
   <title>Mesto</title>
 </head>
 <body class="body">
@@ -14,13 +13,15 @@
     </header>
     <main class="main">
       <section class="profile">
-        <img src="<%=require('./images/Jak_Iv_Kusto.jpg')%>" class="profile__avatar" alt="Аватар профиля">
+        <div class="profile__avatar-container">
+          <img src="<%=require('./images/Jak_Iv_Kusto.jpg')%>" class="profile__avatar" alt="Аватар профиля">
+        </div>
         <div class="profile__container">
           <div class="profile__info">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <h1 class="profile__name"></h1>
             <button type="button" class="profile__editButton button-hover"></button>
           </div>
-          <p class="profile__profession">Исследователь океана</p>
+          <p class="profile__profession"></p>
         </div>
         <div>
           <button type="button" class="profile__addButton button-hover"></button>
@@ -35,6 +36,24 @@
       <p class="footer__author">&#169; 2022 Mesto Russia</p>
     </footer>
   </div>
+  <section class="modal modal-avatar">
+    <div class="modal__content modal__content_avatar">
+      <button type="button" class="modal__close button-hover"></button>
+      <form class="modal__form" name="main" novalidate>
+        <h3 class="modal__title">Обновить аватар</h3>
+        <label class="modal__form-field">
+          <input required 
+            id="imagelink-input" 
+            type="url" 
+            class="modal__input modal__input_type_image-link" 
+            name="link" 
+            placeholder="Новый аватар">
+          <span class="modal__input-error imagelink-input-error"></span>
+        </label>
+        <input type="submit" value="Сохранить" class="modal__submit-button">
+      </form>
+    </div>
+  </section>
   <section class="modal modal-edit">
     <div class="modal__content">
       <button type="button" class="modal__close button-hover"></button>
@@ -101,16 +120,25 @@
         </div>
       </div>
   </section>
+  <section class="modal modal-delete">
+    <div class="modal__content modal__content_delete">
+      <button type="button" class="modal__close button-hover"></button>
+        <h3 class="modal__title modal__title_delete">Вы уверены?</h3>
+        <button class="modal__submit-button">Да</button>
+    </div>
+  </section>
   <template id="template-cards">
     <li class="card-grid__element">
       <img class="card-grid__item">
       <button type="button" class="urn button-hover"></button>
       <div class="card-grid__name">
         <h2 class="card-grid__title"></h2>
-        <button type="button" class="card-grid__likeButton"></button>
+        <div class="card-grid__likes">
+          <button type="button" class="card-grid__likeButton"></button>
+          <p class="card-grid__like-counter">0</p>
+        </div>
       </div>
     </li>
   </template>
-  <!--<script type ="module" src="./pages/index.js"></script>-->
 </body>
 </html>

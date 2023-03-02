@@ -8,6 +8,7 @@ class PopupWithForm extends Popup {
     this._submitForm = submitForm;
     this._form = this._popup.querySelector('.modal__form_type_add');
     this._inputList = Array.from(this._popup.querySelectorAll('.modal__input'));
+    this._submitButton = this._popup.querySelector('.modal__submit-button');
   }
 
   _getInputValues() {
@@ -18,11 +19,14 @@ class PopupWithForm extends Popup {
     return this._formValues;
   }
   
+  setLoadingText(text) {
+    this._submitButton.value = text;
+  }
+
   setEventListeners() {
     this._popup.addEventListener('submit', (event) => {
       event.preventDefault();
       this._submitForm(this._getInputValues());
-      this.close();
     })
     super.setEventListeners();
   }

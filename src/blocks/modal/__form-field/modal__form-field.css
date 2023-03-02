@@ -2,15 +2,17 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
+  margin: 0;
+  margin-bottom: 30px;
 }
 
-.modal__form-field:first-of-type {
-  margin: 0;
+.modal__form-field:last-of-type {
+  margin: 0 0 43px;
 }
 
 @media screen and (min-width:1024px) {
-  .modal__form-field  {
-    margin-top: 33px;
+  .modal__form-field:last-of-type {
+  margin: 0 0 48px; 
   }
 }
+
