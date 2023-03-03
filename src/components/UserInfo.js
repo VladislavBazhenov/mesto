@@ -1,4 +1,3 @@
-import {nameInput, professionInput} from '../utils/constants.js'
 export { UserInfo };
 
 class UserInfo {
@@ -10,8 +9,8 @@ class UserInfo {
 
   getUserInfo() {
      const dataProfile = {
-      username: nameInput.value = this._user.textContent,
-      profession: professionInput.value = this._abotMe.textContent
+      username: this._user.textContent,
+      profession: this._abotMe.textContent
     };
     return dataProfile;
   }

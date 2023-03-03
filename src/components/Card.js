@@ -41,8 +41,11 @@ export { Card };
     this._handleDelCard(this._id, this._newCard);
   }
 
-  _likeElem() {
+  toggleLike() {
     this._likeBtn.classList.toggle('card-grid__likeButton_active');
+  }
+
+  _likeElem() {
     this._handleLikeCard(this, this._id, this._isLiked);
     this._isLiked = !this._isLiked;
   }

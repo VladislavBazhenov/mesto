@@ -1,7 +1,9 @@
 
 import './index.css';
 import { Card } from '../components/Card.js';
-import { validationSettings, 
+import { validationSettings,
+          nameInput,
+          professionInput, 
           profileForm, 
           cardForm,
           avatarForm, 
@@ -20,51 +22,43 @@ import { PopupWithConfirmation } from '../components/PopupWithConfirmation.js';
 
 const api = new Api(apiConfig);
 
-api.getUserData()
-    .then((data) => {
-      user.setUserInfo(data);
-      user.id = data._id;
-    })
-    .catch((error) => {console.log(error)});
+Promise.all([api.getUserData(), api.getInitialCards()])
+.then(([userData, cards]) => {
+  user.setUserInfo(userData);
+  user.id = userData._id;
 
-api.getInitialCards()
-    .then((cardsData) => {
-      const cardList = new Section({
-        items: cardsData,
-        renderer: (item) => {
-          cardList.addItem(createAnyCard(item, user.id));
-        }
-      },'.card-grid')
-      cardList.createElement();
-
-        const popupAddCard = new PopupWithForm('.modal-add', 
-          { submitForm: (item) => {
-            popupAddCard.setLoadingText('Сохранение...');
-            const {name, link} = item; 
-            api.createCard({name, link})
-            .then((newCardData) => {
-              const newCreateCard = createAnyCard(newCardData, user.id);
-              cardList.addItem(newCreateCard);
-            })
-            .then(() => {
-              popupAddCard.close();
-            })
-            .catch((error) => {console.log(error)})
-            .finally(() => {
-              popupAddCard.setLoadingText('Создать');
-            })
-          }
-          });
-
-          popupAddCard.setEventListeners();
-          buttonOpenAddModal.addEventListener('click', () => {
-            popupAddCard.open();
-            formAddValid.resetValidation();
-          });
-
-    })
-    .catch((error) => {console.log(error)});
-
+  const cardList = new Section({
+    items: cards,
+    renderer: (item) => {
+      cardList.addItem(createAnyCard(item, user.id));
+    }
+  },'.card-grid')
+  cardList.createElement();
+    const popupAddCard = new PopupWithForm('.modal-add', 
+      { submitForm: (item) => {
+        popupAddCard.setLoadingText('Сохранение...');
+        const {name, link} = item; 
+        api.createCard({name, link})
+        .then((newCardData) => {
+          const newCreateCard = createAnyCard(newCardData, user.id);
+          cardList.addItem(newCreateCard);
+        })
+        .then(() => {
+          popupAddCard.close();
+        })
+        .catch((error) => {console.log(error)})
+        .finally(() => {
+          popupAddCard.setLoadingText('Создать');
+        })
+      }
+      });
+      popupAddCard.setEventListeners();
+      buttonOpenAddModal.addEventListener('click', () => {
+        popupAddCard.open();
+        formAddValid.resetValidation();
+      });
+})
+.catch((error) => {console.log(error)});
 
 const user = new UserInfo({
   username:'.profile__name',
@@ -126,13 +120,9 @@ const popupEditProfile = new PopupWithForm('.modal-edit',
 const popupImage = new PopupWithImage('.modal-picture');
 
 
-
-
 const formProfileValid = new FormValidator(validationSettings, profileForm);
 const formAddValid = new FormValidator(validationSettings, cardForm);
 const formAvatarValid = new FormValidator(validationSettings, avatarForm);
-
-
 
 function handleCardClick (card) {
   popupImage.open(card);
@@ -148,11 +138,17 @@ function handleLikeCard (anyCard, cardId, cardIsLiked) {
     .then((likeData) => {
       anyCard.updateCounterLike(likeData.likes.length);
     })
+    .then(() => {
+      anyCard.toggleLike();
+    })
     .catch((error) => {console.log(error)})
   } else {
     api.setLike(cardId)
     .then((likeData) => {
       anyCard.updateCounterLike(likeData.likes.length);
+    })
+    .then(() => {
+      anyCard.toggleLike();
     })
     .catch((error) => {console.log(error)})
   }
@@ -177,7 +173,9 @@ popupDeleteCard.setEventListeners();
 
 buttonOpenEditModal.addEventListener('click', () => {
   popupEditProfile.open();
-  user.getUserInfo();
+  const userInfoData = user.getUserInfo();
+  nameInput.value = userInfoData.username;
+  professionInput.value = userInfoData.profession;
   formProfileValid.resetValidation();
 });
 
